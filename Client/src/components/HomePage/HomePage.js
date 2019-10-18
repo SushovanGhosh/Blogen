@@ -49,7 +49,11 @@ class HomePage extends React.Component{
 
     onFormSave = formValues =>{
         console.log(formValues)
-        this.props.saveBlog(formValues)
+        let formdata = new FormData();
+        for(const [key,value] of Object.entries(formValues)){
+            formdata.append(key,value)
+        }
+        this.props.saveBlog(formdata)
     }
 
     renderFileUpload = () => {
@@ -102,7 +106,7 @@ class HomePage extends React.Component{
 
     renderForms = () =>{
         return (
-            <form onSubmit={this.props.handleSubmit(this.onFormSave)} encType="multipart/form-data">
+            <form onSubmit={this.props.handleSubmit(this.onFormSave)}>
                 <div className="form-group">
                     <Field name="title" className="form-control" component={this.renderFormFields} label="Title"/>
                 </div>

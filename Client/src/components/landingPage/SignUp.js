@@ -34,8 +34,10 @@ class SignUp extends React.Component{
 
     onSignUp = formValues =>{
         return baseRequest.post('/api/auth/signup', {..._.omit(formValues,'confirmPassword')})
-        .then(() => {
+        .then(response => {
             this.props.signIn(formValues.username)
+            sessionStorage.setItem('authToken', response.data.accessToken)
+            sessionStorage.setItem('username',response.data.username)
             history.push('/home')
         })
         .catch(error=>{

@@ -1,6 +1,5 @@
 package com.sushovan.blogenservice.models;
 
-import java.util.Arrays;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,9 +7,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name="blog_posts")
@@ -26,8 +28,11 @@ public class BlogPost {
 	private String category;
 	
 	@Lob
-	@JsonInclude(Include.NON_NULL)
-	private String image;
+	@JsonIgnore
+	private byte[] imageFile;
+	
+	@Transient
+	private MultipartFile image;
 	
 	@Lob
 	private String body;
@@ -42,12 +47,12 @@ public class BlogPost {
 		
 	}
 
-	public BlogPost(String title, String category, String image, String body, String username, String createdDate,
+	public BlogPost(String title, String category, byte[] imageFile, String body, String username, String createdDate,
 			String updatedDate) {
 
 		this.title = title;
 		this.category = category;
-		this.image = image;
+		this.imageFile = imageFile;
 		this.body = body;
 		this.username = username;
 		this.createdDate = createdDate;
@@ -91,11 +96,19 @@ public class BlogPost {
 		this.category = category;
 	}
 
-	public String getImage() {
+	public byte[] getImageFile() {
+		return imageFile;
+	}
+
+	public void setImageFile(byte[] imageFile) {
+		this.imageFile = imageFile;
+	}
+
+	public MultipartFile getImage() {
 		return image;
 	}
 
-	public void setImage(String image) {
+	public void setImage(MultipartFile image) {
 		this.image = image;
 	}
 
