@@ -12,6 +12,8 @@ import javax.persistence.Transient;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 
 @Entity
@@ -28,8 +30,14 @@ public class BlogPost {
 	private String category;
 	
 	@Lob
-	@JsonIgnore
+	@JsonInclude(Include.NON_EMPTY)
 	private byte[] imageFile;
+	
+	@JsonInclude(Include.NON_EMPTY)
+	private String imageType;
+	
+	@JsonInclude(Include.NON_EMPTY)
+	private String imageName;
 	
 	@Transient
 	private MultipartFile image;
@@ -47,25 +55,14 @@ public class BlogPost {
 		
 	}
 
-	public BlogPost(String title, String category, byte[] imageFile, String body, String username, String createdDate,
+	public BlogPost(String title, String category, byte[] imageFile, String imageType, String imageName, String body, String username, String createdDate,
 			String updatedDate) {
 
 		this.title = title;
 		this.category = category;
 		this.imageFile = imageFile;
-		this.body = body;
-		this.username = username;
-		this.createdDate = createdDate;
-		this.updatedDate = updatedDate;
-	}
-	
-	
-
-	public BlogPost(String title, String category, String body, String username, String createdDate,
-			String updatedDate) {
-		
-		this.title = title;
-		this.category = category;
+		this.imageType = imageType;
+		this.imageName = imageName;
 		this.body = body;
 		this.username = username;
 		this.createdDate = createdDate;
@@ -102,6 +99,22 @@ public class BlogPost {
 
 	public void setImageFile(byte[] imageFile) {
 		this.imageFile = imageFile;
+	}
+
+	public String getImageType() {
+		return imageType;
+	}
+
+	public void setImageType(String imageType) {
+		this.imageType = imageType;
+	}
+
+	public String getImageName() {
+		return imageName;
+	}
+
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
 	}
 
 	public MultipartFile getImage() {

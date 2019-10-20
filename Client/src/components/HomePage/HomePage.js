@@ -7,6 +7,7 @@ import '../../css/homePage.css'
 import Header from '../Header'
 import Modal from '../Modal'
 import { saveBlog } from '../../actions'
+import BlogList from './BlogList'
 
 class HomePage extends React.Component{
 
@@ -141,6 +142,7 @@ class HomePage extends React.Component{
                             <button data-toggle="modal" data-target="#createBlogModal" className="btn btn-warning" >CREATE NEW BLOG</button>
                         </div>
                     </div>
+                    <BlogList />
                     <Modal id="createBlogModal" size="modal-lg" title="Add Blog" headerStyle="bg-primary text-white" textboxes={()=>this.renderForms()}/>
                 </div>                    
         )

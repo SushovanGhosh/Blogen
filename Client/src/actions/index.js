@@ -31,3 +31,9 @@ export const saveBlog = formdata => async (dispatch, getState) => {
     dispatch({type: 'CREATED_POST', payload: response.data})
     history.push('/');
 }
+
+export const fetchAllBlogs = () => async (dispatch, getstate) => {
+
+    const response = await authenticatedRequest.get('/api/blogs/getBlogs');
+    dispatch({type: 'FETCH_ALL_POSTS', payload: response.data})
+}

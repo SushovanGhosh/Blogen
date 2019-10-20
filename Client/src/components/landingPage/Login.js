@@ -50,7 +50,9 @@ class Login extends React.Component{
         return baseRequest.post('/api/auth/signin',formValues)
         .then(response=>{
             this.props.signIn(response.data.username)
+            console.log(response.data.accessToken)
             sessionStorage.setItem('authToken',response.data.accessToken)
+            console.log(sessionStorage.getItem('authToken'))
             sessionStorage.setItem('userId',response.data.username)
             history.push('/home')
             
