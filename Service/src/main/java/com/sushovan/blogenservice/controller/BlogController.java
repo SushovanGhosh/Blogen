@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -12,6 +13,7 @@ import javax.imageio.ImageIO;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockMultipartFile;
@@ -38,7 +40,7 @@ public class BlogController {
 	private BlogDAO blogDao;
 
 	@PostMapping(path="/saveBlog",consumes= {"multipart/form-data"})
-	public ResponseEntity<?> postTheBlog(@ModelAttribute BlogPost blogPostEntity, 
+	public BlogPost postTheBlog(@ModelAttribute BlogPost blogPostEntity, 
 			@RequestParam(value="image",required=false) MultipartFile file){
 
 		if(blogPostEntity != null) {
@@ -46,10 +48,12 @@ public class BlogController {
 		}
 		
 		try {
-			if(null != file)
+			if(null != file) {
+				
 				blogPostEntity.setImageFile(file.getBytes());
 				blogPostEntity.setImageType(file.getContentType());
 				blogPostEntity.setImageName(file.getOriginalFilename());
+			}
 				
 				
 		} catch (Exception e) {
@@ -63,17 +67,20 @@ public class BlogController {
 //		}catch (Exception e) {
 //			e.printStackTrace();
 //		}
-		return new ResponseEntity(new ApiResponse(true, "posted successfully !!", null),HttpStatus.OK);
+		return blogPostEntity;
 	}
 	
 	@GetMapping("/getBlogs")
 	public List<BlogPost> fetchAllBlogs(){
-		List<BlogPost> myBlogs = blogDao.findAll();
-		for( BlogPost blog: myBlogs) {
-			if(blog.getImageFile() != null) {
-				blog.setImage(new MockMultipartFile(blog.getImageName(), blog.getImageName(), blog.getImageType(), blog.getImageFile()));			
-			}
-		}
+		List<BlogPost> myBlogs = blogDao.findAll(Sort.by(Sort.Direction.DESC,"id"));
+//		for( BlogPost blog: myBlogs) {
+//			if(blog.getImageFile() != null) {
+//				System.out.println("Hi");
+//				byte[] encoded = Base64.getEncoder().encode(blog.getImageFile());
+//				System.out.println(new String(encoded));	
+////				blog.setImageBase64(new String(encoded));
+//			}
+//		}
 		return myBlogs;
 	}
 }

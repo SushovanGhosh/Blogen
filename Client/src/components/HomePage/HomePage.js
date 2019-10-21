@@ -55,6 +55,7 @@ class HomePage extends React.Component{
             formdata.append(key,value)
         }
         this.props.saveBlog(formdata)
+        CKEditor.remove('editor')
     }
 
     renderFileUpload = () => {
@@ -87,7 +88,6 @@ class HomePage extends React.Component{
     }
 
     renderEditor = ({input}) =>{
-        console.log(input)
         return (
             <CKEditor
                 {...input}

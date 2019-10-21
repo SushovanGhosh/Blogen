@@ -9,9 +9,8 @@ export default (state=[],action) =>{
         case "SIGNUP_FAILED":
             return action.payload
         case "CREATED_POST":
-            return {...state, [action.payload.id]: action.payload}
+            return {...state}
         case "FETCH_ALL_POSTS":
-            console.log(action.payload)
             return {...state, ..._.mapKeys(action.payload,'id')}
         default:
             return state;
