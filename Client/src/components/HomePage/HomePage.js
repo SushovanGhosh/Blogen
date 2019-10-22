@@ -55,7 +55,6 @@ class HomePage extends React.Component{
             formdata.append(key,value)
         }
         this.props.saveBlog(formdata)
-        CKEditor.remove('editor')
     }
 
     renderFileUpload = () => {

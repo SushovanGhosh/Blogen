@@ -2,3 +2,25 @@
     display: flex;
     flex: 1 1 auto;
 }
+
+.username{
+    margin-top: -2.25rem!important;
+}
+
+.card-img-top {
+    background-repeat: no-repeat!important;
+    background-position: center!important;
+}
+.card-img-top .img-thumbnail{
+    border-radius: 3px;
+    overflow: hidden;
+    flex: 1 1 auto;
+    max-height: 60vh;
+    width: auto;
+    background-size: cover;    
+}
+.card-body .card-text{
+    font-size: 1.1rem;
+    padding-top: 0px!important;
+}
+

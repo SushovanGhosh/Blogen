@@ -11,11 +11,11 @@ class BlogList extends React.Component{
         
     }
 
-    componentDidUpdate = () => {
-        // if(document.querySelector('.card-text') != null){
-        //     console.log(document.querySelector('.card-text').innerText = "Hi")
-        // }
-    }
+    // componentDidUpdate = () => {
+    //     if(document.querySelector('.card-text') != null){
+    //         document.querySelector('.card-text').innerHtml=document.querySelector('.card-text').innerText
+    //     }
+    // }
 
     renderUpdatedTime = (date) =>{
         var updatedTime = Math.floor((Math.abs(new Date() - new Date(date))) / 1000)
@@ -46,11 +46,18 @@ class BlogList extends React.Component{
 
     truncateTextBody = body =>{
         if(body.length > 197){
-            return body.substring(0,197) + "..."
+            return body.substring(0,197) + "...  "
         }
         else{
             return body
         }
+    }
+
+    stripHtml= htmlElements => {
+        var tmp = document.createElement("P");
+        tmp.className = "card-text text-dark" 
+        tmp.innerHTML = htmlElements;
+        return tmp.textContent || tmp.innerText || "";
     }
 
     render(){
@@ -59,19 +66,25 @@ class BlogList extends React.Component{
                 <div className="container" key={blog.id}>
                     <div className="row">
                         <div className="col-6  mt-3">
-                            <div className="card">
+                            <div className="card w-100">
                                 <div className="card">
-                                    <div className="card-img-top text-center">
-                                        {blog.imageFile ?
-                                        <img src={`data:${blog.imageType};base64,${blog.imageFile}`} className="img-fluid" alt=""/>
-                                        :""}
+                                    <div className="card-title px-4 pt-3 text-dark">
+                                        <h4>{blog.title}</h4>
+                                        <span className="text-dark username mt-n9">{blog.username}</span> 
+                                    </div>   
+
+                                    {blog.imageFile ?
+                                    <div className="card-img-top text-center p-2">
+                                        <img src={`data:${blog.imageType};base64,${blog.imageFile}`} className="img-thumbnail" alt=""/>
                                     </div>
+                                    :""}
+            
                                     <div className="card-body">
-                                        <h4 className="card-title text-dark">
-                                            {blog.title}
-                                        </h4>
-                                        <p className="card-text text-dark" dangerouslySetInnerHTML={{__html:this.truncateTextBody(blog.body)}}>
-                                        </p>
+                                        <div className="card-text lead clearfix text-dark">
+                                            {this.truncateTextBody(this.stripHtml(blog.body))}  
+                                        <div className="btn btn-outline-primary">Read more</div> 
+                                    </div>
+                                        
                                     </div>
                                     <div className="card-footer">
                                         <small className="text-muted">{this.renderUpdatedTime(blog.updatedDate)}</small>
