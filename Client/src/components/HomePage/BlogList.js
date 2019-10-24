@@ -8,8 +8,11 @@ class BlogList extends React.Component{
 
     componentDidMount = () => {
         this.props.fetchAllBlogs()
+        console.log(`Hi ${sessionStorage.getItem('authToken')}`)
         
     }
+
+    
 
     // componentDidUpdate = () => {
     //     if(document.querySelector('.card-text') != null){
@@ -32,15 +35,15 @@ class BlogList extends React.Component{
         }
         else if(updatedTime >= 60*60*24 && updatedTime < 60*60*24*7){
             updatedTime = Math.floor(updatedTime / 60 / 60 / 24)
-            return `Last updated ${updatedTime} weeks ago`
+            return `Last updated ${updatedTime} days ago`
         }
         else if(updatedTime >= 60*60*24*7 && updatedTime < 60*60*24*7*12){
             updatedTime = Math.floor(updatedTime / 60 / 60 / 24 / 7)
-            return `Last updated ${updatedTime} months ago`
+            return `Last updated ${updatedTime} weeks ago`
         }
         else if(updatedTime >= 60*60*24*7*12){
             updatedTime = Math.floor(updatedTime / 60 / 60 / 24 / 7 /12)
-            return `Last updated ${updatedTime} years ago`
+            return `Last updated ${updatedTime} months ago`
         }
     }
 
@@ -65,7 +68,7 @@ class BlogList extends React.Component{
             return (
                 <div className="container" key={blog.id}>
                     <div className="row">
-                        <div className="col-6  mt-3">
+                        <div className="col-9 mt-3">
                             <div className="card w-100">
                                 <div className="card">
                                     <div className="card-title px-4 pt-3 text-dark">
@@ -82,7 +85,7 @@ class BlogList extends React.Component{
                                     <div className="card-body">
                                         <div className="card-text lead clearfix text-dark">
                                             {this.truncateTextBody(this.stripHtml(blog.body))}  
-                                        <div className="btn btn-outline-primary">Read more</div> 
+                                        <button className="btn btn-outline-primary">Read more</button> 
                                     </div>
                                         
                                     </div>
@@ -101,7 +104,7 @@ class BlogList extends React.Component{
 }
 
 const mapStateToProps = state => {
-    return {blogList: Object.values(state.response).reverse()}
+    return {blogList: Object.values(state.blogList).reverse()}
 }
 
 

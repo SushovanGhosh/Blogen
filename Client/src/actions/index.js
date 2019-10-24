@@ -37,3 +37,9 @@ export const fetchAllBlogs = () => async dispatch => {
     const response = await authenticatedRequest.get('/api/blogs/getBlogs');
     dispatch({type: 'FETCH_ALL_POSTS', payload: response.data})
 }
+
+export const fetchAllCategories = () => async dispatch => {
+
+    const response = await authenticatedRequest.get('/api/blogs/getCategories');
+    dispatch({type: 'FETCH_ALL_CATEGORIES', payload: response.data})
+}

@@ -1,0 +1,14 @@
+.category-icons{
+    width: 30px !important;
+    height: 30px !important;
+    object-fit: contain;
+}
+.list-group-item{
+    border: 0px!important;
+    text-align: left;
+}
+.category-button{
+    border: 0px;
+    border: none;
+    background:none;
+}

@@ -6,8 +6,9 @@ import { connect } from 'react-redux'
 import '../../css/homePage.css'
 import Header from '../Header'
 import Modal from '../Modal'
-import { saveBlog } from '../../actions'
+import { saveBlog,fetchAllCategories } from '../../actions'
 import BlogList from './BlogList'
+import CategoryList from './CategoryList'
 
 class HomePage extends React.Component{
 
@@ -26,6 +27,7 @@ class HomePage extends React.Component{
     }
     componentDidMount = () =>{
         this.cleanScreen()
+        this.props.fetchAllCategories()
     }
 
     renderFormFields = ({input,label,meta,type}) =>{
@@ -74,11 +76,11 @@ class HomePage extends React.Component{
             <div>
             <select {...input} className={`form-control ${invalid}`}>
                 <option value="" selected disabled>Choose one</option>
-                <option value="Technology">Technology</option>
-                <option value="Politics">Politics</option>
-                <option value="Business">Business</option>
-                <option value="Health & Wellness">Health & Wellness</option>
-                <option value="Movies">Movies</option>
+                {this.props.categories.map(el =>{
+                    return (
+                        <option value={el.category} key={el.id}>{el.category}</option>
+                    )
+                })}
             </select>
             {console.log(meta)}
             {this.renderError(meta)}
@@ -134,14 +136,24 @@ class HomePage extends React.Component{
     render(){
         
         return(
-                <div>
+                <div className="homepage-body">
                     <Header />
                     <div className="home-section">
-                        <div className="home-inner container text-center">
+                        <div className="home-inner text-center container clearfix">
                             <button data-toggle="modal" data-target="#createBlogModal" className="btn btn-warning" >CREATE NEW BLOG</button>
                         </div>
                     </div>
-                    <BlogList />
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-sm-2">
+                                <CategoryList />
+                            </div>
+                            <div className="col-sm-10">
+                                <BlogList />
+                            </div>
+                        </div>
+                    </div>
+                    
                     <Modal id="createBlogModal" size="modal-lg" title="Add Blog" headerStyle="bg-primary text-white" textboxes={()=>this.renderForms()}/>
                 </div>                    
         )
@@ -160,8 +172,10 @@ const validate = formValues =>{
 
     return error
 }
-
-export default connect(null,{saveBlog})(reduxForm({
+const mapStateToProps = state => {
+    return {categories: Object.values(state.categoryList)}
+}
+export default connect(mapStateToProps,{saveBlog,fetchAllCategories})(reduxForm({
     form: 'HomePage',
     validate
 })(HomePage))

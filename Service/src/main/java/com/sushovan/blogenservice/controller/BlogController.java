@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Base64;
 import java.util.List;
 
@@ -12,9 +13,11 @@ import javax.imageio.ImageIO;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItem;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -27,7 +30,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import com.sushovan.blogenservice.dao.BlogCategoryDAO;
 import com.sushovan.blogenservice.dao.BlogDAO;
+import com.sushovan.blogenservice.models.BlogCategory;
 import com.sushovan.blogenservice.models.BlogPost;
 import com.sushovan.blogenservice.payload.ApiResponse;
 
@@ -38,6 +43,8 @@ public class BlogController {
 	
 	@Autowired
 	private BlogDAO blogDao;
+	
+	@Autowired BlogCategoryDAO blogCategoryDao;
 
 	@PostMapping(path="/saveBlog",consumes= {"multipart/form-data"})
 	public BlogPost postTheBlog(@ModelAttribute BlogPost blogPostEntity, 
@@ -82,5 +89,21 @@ public class BlogController {
 //			}
 //		}
 		return myBlogs;
+	}
+	
+	@GetMapping(value="/getCategories")
+	public List<BlogCategory> fetchAllCategories(){
+		
+		List<BlogCategory> categories = blogCategoryDao.findAll();
+		for(BlogCategory category: categories) {
+			InputStream in = getClass().getResourceAsStream("/images/icons/"+category.getImageName());
+			try {
+				category.setImageByte(IOUtils.toByteArray(in));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return categories;
 	}
 }
