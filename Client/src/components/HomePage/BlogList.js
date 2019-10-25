@@ -1,24 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+
 import { fetchAllBlogs } from '../../actions'
 import '../../css/blogList.css'
+import history from '../../history'
 
 class BlogList extends React.Component{
 
     componentDidMount = () => {
         this.props.fetchAllBlogs()
-        console.log(`Hi ${sessionStorage.getItem('authToken')}`)
-        
     }
-
-    
-
-    // componentDidUpdate = () => {
-    //     if(document.querySelector('.card-text') != null){
-    //         document.querySelector('.card-text').innerHtml=document.querySelector('.card-text').innerText
-    //     }
-    // }
 
     renderUpdatedTime = (date) =>{
         var updatedTime = Math.floor((Math.abs(new Date() - new Date(date))) / 1000)
@@ -63,6 +55,10 @@ class BlogList extends React.Component{
         return tmp.textContent || tmp.innerText || "";
     }
 
+    renderSelectedBlog = id =>{
+        history.push(`/viewBlog/${id}`)
+    }
+
     render(){
         return this.props.blogList.map(blog =>{
             return (
@@ -85,7 +81,7 @@ class BlogList extends React.Component{
                                     <div className="card-body">
                                         <div className="card-text lead clearfix text-dark">
                                             {this.truncateTextBody(this.stripHtml(blog.body))}  
-                                        <button className="btn btn-outline-primary">Read more</button> 
+                                        <button onClick={()=> this.renderSelectedBlog(blog.id)} className="btn btn-outline-primary">Read more</button> 
                                     </div>
                                         
                                     </div>

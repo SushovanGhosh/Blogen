@@ -1,11 +1,12 @@
 import React from 'react'
 import { Redirect, Route } from 'react-router-dom'
+import Cookie from 'js-cookie'
 
 export const PrivateRouteToHome = ({ component: Component, ...rest}) => {
     return (
         <Route {...rest}
         render={props =>
-            sessionStorage.getItem("authToken") ? (
+            Cookie.get("authToken") ? (
                 <Component {...rest} {...props} />
             ) : (
                 <Redirect
@@ -22,7 +23,7 @@ export const PrivateRouteToLogin = ({ component: Component, ...rest}) => {
     return (
         <Route {...rest}
         render={props =>
-            sessionStorage.getItem("authToken") ?(
+            Cookie.get("authToken") ?(
                 <Redirect
                 to={{
                     pathname: "/home",

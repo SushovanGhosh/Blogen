@@ -27,19 +27,19 @@ export const saveBlog = formdata => async (dispatch, getState) => {
     formdata.append('username',username)
     // const response = await authenticatedRequest.post('/api/blogs/saveBlog',{..._.omit(formValues,'image'), username: username, createdDate: currentDate, updatedDate: currentDate},{params: formValues.image})
     // const response = await authenticatedRequest.post('/api/blogs/saveBlog',{...formValues, username: username, createdDate: currentDate, updatedDate: currentDate})
-    await authenticatedRequest.post('/api/blogs/saveBlog',formdata)
+    await authenticatedRequest().post('/api/blogs/saveBlog',formdata)
     dispatch({type: 'CREATED_POST'})
     history.push('/');
 }
 
 export const fetchAllBlogs = () => async dispatch => {
 
-    const response = await authenticatedRequest.get('/api/blogs/getBlogs');
+    const response = await authenticatedRequest().get('/api/blogs/getBlogs');
     dispatch({type: 'FETCH_ALL_POSTS', payload: response.data})
 }
 
 export const fetchAllCategories = () => async dispatch => {
 
-    const response = await authenticatedRequest.get('/api/blogs/getCategories');
+    const response = await authenticatedRequest().get('/api/blogs/getCategories');
     dispatch({type: 'FETCH_ALL_CATEGORIES', payload: response.data})
 }

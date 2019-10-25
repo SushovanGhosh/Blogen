@@ -2,6 +2,7 @@ import React from 'react'
 import { SubmissionError,Field,reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import _ from 'lodash'
+import Cookie from 'js-cookie'
 
 import history from '../../history'
 import { signIn } from '../../actions'
@@ -36,8 +37,10 @@ class SignUp extends React.Component{
         return baseRequest.post('/api/auth/signup', {..._.omit(formValues,'confirmPassword')})
         .then(response => {
             this.props.signIn(formValues.username)
-            sessionStorage.setItem('authToken', response.data.accessToken)
-            sessionStorage.setItem('username',response.data.username)
+            Cookie.set('authToken', response.data.accessToken)
+            Cookie.set('userId', response.data.username)
+            // sessionStorage.setItem('authToken', response.data.accessToken)
+            // sessionStorage.setItem('username',response.data.username)
             history.push('/home')
         })
         .catch(error=>{

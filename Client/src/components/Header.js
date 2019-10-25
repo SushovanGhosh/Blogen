@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import Cookie from 'js-cookie'
 
 import '../css/header.css'
 import Login from './landingPage/Login'
@@ -20,8 +21,8 @@ class Header extends React.Component{
     // }
 
     componentDidMount = () =>{
-        if(sessionStorage.getItem('authToken')){
-            this.props.signIn(sessionStorage.getItem('userId'))
+        if(Cookie.get('authToken')){
+            this.props.signIn(Cookie.get('userId'))
         }
         else{
             this.props.signOut()
@@ -30,8 +31,10 @@ class Header extends React.Component{
     }
 
     onLogout = () => {
-        sessionStorage.removeItem('authToken')
-        sessionStorage.removeItem('userId')
+        Cookie.remove('authToken')
+        Cookie.remove('userId')
+        // sessionStorage.removeItem('authToken')
+        // sessionStorage.removeItem('userId')
         this.props.signOut()
         history.push('/')
     }

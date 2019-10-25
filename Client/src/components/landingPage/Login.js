@@ -1,6 +1,8 @@
 import React from 'react'
+import Cookie from 'js-cookie'
 import { SubmissionError,Field,reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
+
 
 import { baseRequest } from '../../api/blogenService'
 import history from '../../history'
@@ -51,10 +53,15 @@ class Login extends React.Component{
         .then(response=>{
             this.props.signIn(response.data.username)
             console.log(response.data.accessToken)
-            sessionStorage.setItem('authToken',response.data.accessToken)
-            console.log(sessionStorage.getItem('authToken'))
-            sessionStorage.setItem('userId',response.data.username)
+            Cookie.set('authToken', response.data.accessToken)
+            Cookie.set('userId', response.data.username)
+            // sessionStorage.setItem('authToken',response.data.accessToken)
+            // console.log(sessionStorage.getItem('authToken'))
+            console.log(Cookie.get('authToken'))
+            // sessionStorage.setItem('userId',response.data.username)
             history.push('/home')
+            
+            
             
         })
         .catch(error=>{

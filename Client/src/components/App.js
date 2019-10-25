@@ -4,7 +4,9 @@ import { Router, Switch } from 'react-router-dom'
 import history from '../history'
 import LandingPage from './landingPage/LandingPage'
 import HomePage from './HomePage/HomePage'
+import { Route } from 'react-router-dom'
 import { PrivateRouteToHome,PrivateRouteToLogin } from './PrivateRoute'
+import BlogViewPage from './BlogViewPage/BlogViewPage'
 
 class App extends React.Component{
 
@@ -16,6 +18,7 @@ class App extends React.Component{
                         <Switch>
                             <PrivateRouteToLogin path='/' exact component={LandingPage}/>
                             <PrivateRouteToHome path='/home' exact component={HomePage} />
+                            <Route path='/viewBlog/:id' exact component={BlogViewPage} />
                         </Switch>
                     </div>
                 </Router>
