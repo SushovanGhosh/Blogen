@@ -10,7 +10,7 @@ class LandingPage extends React.Component{
 
     render(){
         return (
-            <div>
+            <div className="landing-page-body">
                 <Header navList={["Explore","About us","Log In"]}/>
                 <SignUp />
                 <Explore />

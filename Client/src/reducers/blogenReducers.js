@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-export const blogs = (state=[],action) =>{
+export const blogs = (state={},action) =>{
 
     switch(action.type){
         case "SIGNUP_USER":
@@ -12,6 +12,8 @@ export const blogs = (state=[],action) =>{
             return {...state}
         case "FETCH_ALL_POSTS":
             return {...state, ..._.mapKeys(action.payload,'id')}
+        case 'FETCH_POST_BY_ID':
+            return {...state, [action.payload.id]: action.payload}
         default:
             return state;
     }

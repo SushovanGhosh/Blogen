@@ -55,8 +55,8 @@ class BlogList extends React.Component{
         return tmp.textContent || tmp.innerText || "";
     }
 
-    renderSelectedBlog = id =>{
-        history.push(`/viewBlog/${id}`)
+    renderSelectedBlog = blogData =>{
+        history.push(`/viewBlog/${blogData.id}`)
     }
 
     render(){
@@ -81,7 +81,7 @@ class BlogList extends React.Component{
                                     <div className="card-body">
                                         <div className="card-text lead clearfix text-dark">
                                             {this.truncateTextBody(this.stripHtml(blog.body))}  
-                                        <button onClick={()=> this.renderSelectedBlog(blog.id)} className="btn btn-outline-primary">Read more</button> 
+                                        <button onClick={()=> this.renderSelectedBlog(blog)} className="btn btn-outline-primary">Read more</button> 
                                     </div>
                                         
                                     </div>

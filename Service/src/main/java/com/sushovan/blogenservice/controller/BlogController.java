@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 
 import javax.imageio.ImageIO;
 
@@ -23,6 +24,7 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,6 +34,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.sushovan.blogenservice.dao.BlogCategoryDAO;
 import com.sushovan.blogenservice.dao.BlogDAO;
+import com.sushovan.blogenservice.exception.BadRequestException;
 import com.sushovan.blogenservice.models.BlogCategory;
 import com.sushovan.blogenservice.models.BlogPost;
 import com.sushovan.blogenservice.payload.ApiResponse;
@@ -106,4 +109,13 @@ public class BlogController {
 		}
 		return categories;
 	}
+	
+	@GetMapping("/getBlog/{id}")
+		public BlogPost fetchBlog(@PathVariable int id) {
+			
+			Optional<BlogPost> result = blogDao.findById(id);
+			result.orElseThrow(
+					()-> new BadRequestException("Blog with id - "+ id +"is not found"));
+			return result.get();
+		}
 }
