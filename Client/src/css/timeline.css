@@ -28,3 +28,11 @@
     padding-left: 10px;
     color: #909090;
 }
+.share-button{
+    cursor: pointer;
+}
+
+.blog-body-viewpage img {
+    max-width: 100%;
+    height: auto!important
+}

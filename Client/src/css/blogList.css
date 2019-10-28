@@ -19,7 +19,7 @@
     width: auto;
     background-size: cover;    
 }
-.card-body .card-text{
+.card-body .card-text,.lead{
     font-size: 1.1rem;
     padding-top: 0px!important;
 }
