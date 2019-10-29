@@ -138,18 +138,21 @@ class HomePage extends React.Component{
         return(
                 <div className="homepage-body">
                     <Header />
-                    <div className="home-section">
-                        <div className="home-inner text-center container clearfix">
-                            <button data-toggle="modal" data-target="#createBlogModal" className="btn btn-warning" >CREATE NEW BLOG</button>
-                        </div>
-                    </div>
                     <div className="container">
                         <div className="row">
-                            <div className="col-sm-2">
+                            <div className="col-lg-2 category-list">
                                 <CategoryList />
                             </div>
-                            <div className="col-sm-10">
+                            <div className="col-lg-8">
+                                <div className="home-section">
+                                    <div className="home-inner text-center container clearfix">
+                                        <button data-toggle="modal" data-target="#createBlogModal" className="btn btn-warning" >CREATE NEW BLOG</button>
+                                     </div>
+                                </div>
                                 <BlogList />
+                            </div>
+                            <div className="col-lg-2">
+
                             </div>
                         </div>
                     </div>

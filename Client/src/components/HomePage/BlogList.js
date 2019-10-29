@@ -64,11 +64,11 @@ class BlogList extends React.Component{
             return (
                 <div className="container" key={blog.id}>
                     <div className="row">
-                        <div className="col-9 mt-3">
+                        <div className="mt-3">
                             <div className="card w-100">
                                 <div className="card">
                                     <div className="card-title px-4 pt-3 text-dark">
-                                        <h4>{blog.title}</h4>
+                                        <h3>{blog.title}</h3>
                                         <span className="text-dark username mt-n9">{blog.username}</span> 
                                     </div>   
 
