@@ -118,4 +118,11 @@ public class BlogController {
 					()-> new BadRequestException("Blog with id - "+ id +"is not found"));
 			return result.get();
 		}
+	
+	@GetMapping("/getBlogsByCategory/{category}")
+	public List<BlogPost> fetchBlogsByCategory(@PathVariable String category){
+		
+		List<BlogPost> result = blogDao.findBlogsByCategory(category);
+		return result;
+	}
 }

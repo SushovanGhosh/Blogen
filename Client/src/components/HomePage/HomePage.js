@@ -75,7 +75,7 @@ class HomePage extends React.Component{
         return (
             <div>
             <select {...input} className={`form-control ${invalid}`}>
-                <option value="" selected disabled>Choose one</option>
+                <option value="" disabled>Choose one</option>
                 {this.props.categories.map(el =>{
                     return (
                         <option value={el.category} key={el.id}>{el.category}</option>
@@ -138,12 +138,12 @@ class HomePage extends React.Component{
         return(
                 <div className="homepage-body">
                     <Header />
-                    <div className="container">
+                    <div className="container-fluid">
                         <div className="row">
-                            <div className="col-lg-2 category-list">
+                            <div className="col-lg-3 category-list">
                                 <CategoryList />
                             </div>
-                            <div className="col-lg-8">
+                            <div className="col-lg-6">
                                 <div className="home-section">
                                     <div className="home-inner text-center container clearfix">
                                         <button data-toggle="modal" data-target="#createBlogModal" className="btn btn-warning" >CREATE NEW BLOG</button>
@@ -151,7 +151,7 @@ class HomePage extends React.Component{
                                 </div>
                                 <BlogList />
                             </div>
-                            <div className="col-lg-2">
+                            <div className="col-lg-3">
 
                             </div>
                         </div>

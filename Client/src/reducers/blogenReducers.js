@@ -19,10 +19,20 @@ export const blogs = (state={},action) =>{
     }
 }
 
-export const categories = (state=[],action) =>{
+export const categories = (state={},action) =>{
 
     switch(action.type){
         case "FETCH_ALL_CATEGORIES":
+            return {...state, ..._.mapKeys(action.payload,'id')}
+        default:
+            return state;
+    }
+}
+
+export const blogListByCategories = (state={},action) => {
+
+    switch(action.type){
+        case 'FETCH_POSTS_BY_CATEGORY':
             return {...state, ..._.mapKeys(action.payload,'id')}
         default:
             return state;

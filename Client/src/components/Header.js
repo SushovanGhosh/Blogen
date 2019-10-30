@@ -46,7 +46,7 @@ class Header extends React.Component{
         return <button data-toggle="modal" data-target="#loginModal" className="nav-link btn btn-link">Login</button>
     } 
 
-    renderNavlist = (navList) =>{
+    renderNavlist =() =>{
         return(
             <ul className="navbar-nav ml-auto">
                 <li className="nav-item">

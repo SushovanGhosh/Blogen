@@ -4,15 +4,15 @@ import { connect } from 'react-redux'
 import Header from '../Header'
 import Timeline from './Timeline'
 import { fetchBlog, fetchAllBlogs } from '../../actions'
+import BlogSuggestionList from './BlogSuggestionList'
 
 class BlogViewPage extends React.Component{
     
     componentDidMount = () =>{
         console.log(this.props)
+        window.scrollTo(0, 0)
         this.props.fetchAllBlogs();
-        // this.props.fetchBlog(this.props.match.params.id)
-        
-
+        this.props.fetchBlog(this.props.match.params.id)
     }
 
     // fetchRandomPost = () =>{
@@ -45,6 +45,8 @@ class BlogViewPage extends React.Component{
                         </div>
                         <div className="col-sm-4">
                             {/* {this.fetchRandomPost()} */}
+                            {console.log(this.props.blog)}
+                            <BlogSuggestionList category={this.props.blog.category} />
                         </div>
                     </div>
                 </div>
