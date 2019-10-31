@@ -71,7 +71,7 @@ class Timeline extends React.Component{
                     alt={this.props.blogTitle} className="img-fluid timeline-image" />:''}  
                 </div>
                 <div className="row pt-4 blog-body-viewpage">
-                    <div className="lead" dangerouslySetInnerHTML={{__html:this.props.body}}></div>
+                    <div className="lead test-justify" dangerouslySetInnerHTML={{__html:this.props.body}}></div>
                 </div>
                 
             </div>

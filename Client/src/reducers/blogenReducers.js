@@ -33,7 +33,7 @@ export const blogListByCategories = (state={},action) => {
 
     switch(action.type){
         case 'FETCH_POSTS_BY_CATEGORY':
-            return {...state, ..._.mapKeys(action.payload,'id')}
+            return {...state, ...action.payload}
         default:
             return state;
     }

@@ -35,6 +35,7 @@ class BlogViewPage extends React.Component{
                 <div>
                     <Header />
                     <div className="container">
+                        <div className="row">
                         <div className="col-sm-8">
                             <Timeline blogImage={imageFile} 
                             blogImageType={imageType} 
@@ -47,6 +48,7 @@ class BlogViewPage extends React.Component{
                             {/* {this.fetchRandomPost()} */}
                             {console.log(this.props.blog)}
                             <BlogSuggestionList category={this.props.blog.category} />
+                        </div>
                         </div>
                     </div>
                 </div>
