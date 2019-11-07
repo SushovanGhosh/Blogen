@@ -14,6 +14,8 @@ export const blogs = (state={},action) =>{
             return {...state, ..._.mapKeys(action.payload,'id')}
         case 'FETCH_POST_BY_ID':
             return {...state, [action.payload.id]: action.payload}
+        case 'FETCH_POSTS_BY_CATEGORY':
+            return {...state, [action.payload.id]: action.payload}
         default:
             return state;
     }
@@ -32,7 +34,7 @@ export const categories = (state={},action) =>{
 export const blogListByCategories = (state={},action) => {
 
     switch(action.type){
-        case 'FETCH_POSTS_BY_CATEGORY':
+        case 'FETCH_RANDOM_POSTS_BY_CATEGORY':
             return {...state, ...action.payload}
         default:
             return state;

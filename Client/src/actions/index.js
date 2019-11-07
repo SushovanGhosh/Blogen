@@ -50,8 +50,14 @@ export const fetchAllCategories = () => async dispatch => {
     dispatch({type: 'FETCH_ALL_CATEGORIES', payload: response.data})
 }
 
-export const fetchBlogByCategory = (category) => async dispatch => {
+export const fetchBlogByCategory = (id) => async dispatch => {
 
-    const response = await authenticatedRequest().get(`/api/blogs/getBlogsByCategory/${category}`);
+    const response = await authenticatedRequest().get(`/api/blogs/getBlogsByCategory/${id}`);
+    dispatch({type: 'FETCH_RANDOM_POSTS_BY_CATEGORY', payload: response.data})
+}
+
+export const fetchFilteredBlogsByCategory = (category) => async dispatch => {
+
+    const response = await authenticatedRequest().get(`/api/blogs/getFilteredBlogsByCategory/${category}`);
     dispatch({type: 'FETCH_POSTS_BY_CATEGORY', payload: response.data})
 }

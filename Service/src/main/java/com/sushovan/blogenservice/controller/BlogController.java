@@ -119,10 +119,23 @@ public class BlogController {
 			return result.get();
 		}
 	
-	@GetMapping("/getBlogsByCategory/{category}")
-	public List<BlogPost> fetchBlogsByCategory(@PathVariable String category){
+	@GetMapping("/getBlogsByCategory/{id}")
+	public List<BlogPost> fetchRandomBlogsByCategory(@PathVariable String id){
+		
+		List<BlogPost> result = blogDao.findRandomBlogsByCategory(Integer.parseInt(id));
+		return result;
+	}
+	
+	@GetMapping("/getFilteredBlogsByCategory/{category}")
+	public List<BlogPost> fetchBlogsFilteredByCategory(@PathVariable String category){
 		
 		List<BlogPost> result = blogDao.findBlogsByCategory(category);
 		return result;
 	}
 }
+
+
+
+
+
+

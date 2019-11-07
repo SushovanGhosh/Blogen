@@ -146,7 +146,24 @@ class HomePage extends React.Component{
                             <div className="col-lg-6">
                                 <div className="home-section">
                                     <div className="home-inner text-center container clearfix">
-                                        <button data-toggle="modal" data-target="#createBlogModal" className="btn btn-warning" >CREATE NEW BLOG</button>
+                                        {/* <button data-toggle="modal" 
+                                            data-target="#createBlogModal" 
+                                            className="btn btn-warning" >
+                                                CREATE NEW BLOG
+                                        </button> */}
+                                        <div className="row">
+                                            <div className="card w-100">
+                                                <div className="card">
+                                                    <div className="card-body text-left">
+                                                        <a href="#" data-toggle="modal" 
+                                                                data-target="#createBlogModal"
+                                                                className="btn btn-link text-muted text-decoration-none">
+                                                                <h3><strong>What's in your mind ?</strong></h3>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>     
                                      </div>
                                 </div>
                                 <BlogList />

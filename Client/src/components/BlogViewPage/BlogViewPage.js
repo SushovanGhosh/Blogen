@@ -5,6 +5,7 @@ import Header from '../Header'
 import Timeline from './Timeline'
 import { fetchBlog, fetchAllBlogs } from '../../actions'
 import BlogSuggestionList from './BlogSuggestionList'
+import CommentSection from './CommentSection'
 
 class BlogViewPage extends React.Component{
     
@@ -36,18 +37,20 @@ class BlogViewPage extends React.Component{
                     <Header />
                     <div className="container">
                         <div className="row">
-                        <div className="col-sm-8">
+                        <div className="col-lg-8">
                             <Timeline blogImage={imageFile} 
                             blogImageType={imageType} 
                             blogTitle={title} 
                             author={username} 
                             date={updatedDate} 
                             body={body} />
+                            <CommentSection />
                         </div>
-                        <div className="col-sm-4">
+                        <div className="col-lg-1"></div>
+                        <div className="col-lg-3 d-none d-lg-block">
                             {/* {this.fetchRandomPost()} */}
                             {console.log(this.props.blog)}
-                            <BlogSuggestionList category={this.props.blog.category} />
+                            <BlogSuggestionList blog={this.props.blog} />
                         </div>
                         </div>
                     </div>

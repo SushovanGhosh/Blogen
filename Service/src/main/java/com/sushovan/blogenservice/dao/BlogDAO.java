@@ -12,6 +12,9 @@ import com.sushovan.blogenservice.models.BlogPost;
 @Repository
 public interface BlogDAO extends JpaRepository<BlogPost, Integer> {
 
-	@Query("from BlogPost where category = :category ORDER BY RAND()")
-	public List<BlogPost> findBlogsByCategory(@Param("category") String category);
+	@Query("from BlogPost where category IN (select category from BlogPost where id = :id) and id != :id ORDER BY RAND()")
+	public List<BlogPost> findRandomBlogsByCategory(@Param("id") int id);
+	
+	@Query("from BlogPost where category = :category")
+	public List<BlogPost> findBlogsByCategory(@Param("category") String category );
 }

@@ -8,3 +8,9 @@
     border-bottom: 1px solid #d4d4d5;
     padding-bottom: 0.385em;
 }
+.featured-blogs .btn-link{
+    color:#986b00;
+}
+.featured-blogs .btn-link:hover{
+    color:#007bff;
+}
