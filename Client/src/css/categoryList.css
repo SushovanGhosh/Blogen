@@ -32,19 +32,25 @@
         color:white;
         padding: none;
     }
-    .category-list .btn:hover, .category-button:focus{
-        background-color: #333333;
+    .category-list .btn:hover, .category-button:focus, .category-button-active{
+        background-color: #333333!important;
         outline: none;
         text-decoration: none; 
-        border-color: transparent;    
+        border-color: transparent!important;    
     }
     .category-list .list-group-item{
         padding: 0px;
     }
     .category-list li img{
-      display: none;  
+        display: none;  
     }
     .category-list .ml-5{
         margin-left: 0px!important;
     }
+}
+
+.category-button-active, .category-button-active:hover{
+    background-color: #dae0e5;
+    border-color: #d3d9df;
+    color: #000000;
 }

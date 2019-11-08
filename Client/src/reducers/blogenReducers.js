@@ -15,7 +15,7 @@ export const blogs = (state={},action) =>{
         case 'FETCH_POST_BY_ID':
             return {...state, [action.payload.id]: action.payload}
         case 'FETCH_POSTS_BY_CATEGORY':
-            return {...state, [action.payload.id]: action.payload}
+            return {..._.mapKeys(action.payload,'id')}
         default:
             return state;
     }

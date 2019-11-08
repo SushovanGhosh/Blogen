@@ -166,7 +166,7 @@ class HomePage extends React.Component{
                                         </div>     
                                      </div>
                                 </div>
-                                <BlogList />
+                                <BlogList filterCategory="all"/>
                             </div>
                             <div className="col-lg-3">
 

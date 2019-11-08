@@ -8,18 +8,23 @@ import history from '../../history'
 class CategoryList extends React.Component{
 
 
-    renderBlogsByCategory = (category) => {
+    componentDidMount = () => {
+        this.props.fetchAllCategories()
+    }
 
+    renderBlogsByCategory = (category) => {
+        
         history.push(`/blogCategory/${category}`)
     }
 
     render(){
         return (
-            
                 <ul className="list-group list-group-flush ml-5 mt-4 sticky-top">
                     {this.props.categories.map(el =>{
                     return (
-                        <button onClick={()=>this.renderBlogsByCategory(el.category)} className="btn btn-link category-button" key={el.id}>
+                        <button onClick={()=>this.renderBlogsByCategory(el.category)} 
+                            className={`btn btn-link category-button${this.props.selectedCategory===el.category ? '-active':''}`} 
+                            key={el.id}>
                             <li className="list-group-item bg-transparent" >
                                 <div className="row">  
                                     <div className="col-lg-3">
