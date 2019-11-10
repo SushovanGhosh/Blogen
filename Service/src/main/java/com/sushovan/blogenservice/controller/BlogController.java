@@ -36,6 +36,7 @@ import com.sushovan.blogenservice.dao.BlogCategoryDAO;
 import com.sushovan.blogenservice.dao.BlogDAO;
 import com.sushovan.blogenservice.exception.BadRequestException;
 import com.sushovan.blogenservice.models.BlogCategory;
+import com.sushovan.blogenservice.models.BlogComment;
 import com.sushovan.blogenservice.models.BlogPost;
 import com.sushovan.blogenservice.payload.ApiResponse;
 
@@ -131,6 +132,15 @@ public class BlogController {
 		
 		List<BlogPost> result = blogDao.findBlogsByCategory(category);
 		return result;
+	}
+	
+	@GetMapping("/getCommentsByBlog/{id}")
+	public List<BlogComment> fetchCommentsByBlog(@PathVariable int id){
+		
+		Optional<BlogPost> blog = blogDao.findById(id);
+		blog.orElseThrow(()-> new BadRequestException("Blog with id - "+ id +"is not found"));
+		List<BlogComment> comments = blog.get().getComments();
+		return comments;
 	}
 }
 

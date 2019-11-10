@@ -69,8 +69,8 @@ class BlogList extends React.Component{
                 <div className="container" key={blog.id}>
                     <div className="row">
                         <div className="mt-3">
-                            <div className="card w-100">
-                                <div className="card">
+                            
+                                <div className="card w-100">
                                     <div className="card-title px-4 pt-3 text-dark">
                                         <h3>{blog.title}</h3>
                                         <span className="text-dark username mt-n9">{blog.username}</span> 
@@ -93,7 +93,7 @@ class BlogList extends React.Component{
                                         <small className="text-muted">{this.renderUpdatedTime(blog.updatedDate)}</small>
                                     </div>
                                 </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
