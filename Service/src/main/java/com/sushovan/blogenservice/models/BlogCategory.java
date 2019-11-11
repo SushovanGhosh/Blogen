@@ -26,14 +26,20 @@ public class BlogCategory {
 	@Transient
 	private byte[] imageByte;
 	
+	@Column(name="timeline_image")
+	private String timelineImage;
+	
+	@Transient
+	private byte[] timelineImageByte;
 	
 	public BlogCategory() {
 		
 	}
 
-	public BlogCategory(String category, String imageName) {
+	public BlogCategory(String category, String imageName, String timelineImage) {
 		this.category = category;
 		this.imageName = imageName;
+		this.timelineImage = timelineImage;
 	}
 
 	public int getId() {
@@ -66,6 +72,22 @@ public class BlogCategory {
 
 	public void setImageByte(byte[] imageByte) {
 		this.imageByte = imageByte;
+	}
+
+	public String getTimelineImage() {
+		return timelineImage;
+	}
+
+	public void setTimelineImage(String timelineImage) {
+		this.timelineImage = timelineImage;
+	}
+
+	public byte[] getTimelineImageByte() {
+		return timelineImageByte;
+	}
+
+	public void setTimelineImageByte(byte[] timelineImageByte) {
+		this.timelineImageByte = timelineImageByte;
 	}
 		
 }

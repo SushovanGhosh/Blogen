@@ -3,37 +3,39 @@ import { connect } from 'react-redux'
 
 import Header from '../Header'
 import '../../css/categoryList.css'
+import '../../css/filteredBlogsPage.css'
 import CategoryList from '../HomePage/CategoryList'
 import BlogList from '../HomePage/BlogList'
 import { fetchFilteredBlogsByCategory, fetchAllCategories } from '../../actions'
 
-class FilteredBlogsPage extends React.Component{
+class FilteredBlogsPage extends React.Component {
 
-    state = {category:''}
+    state = { category: '' }
     componentDidMount = () => {
         this.props.fetchFilteredBlogsByCategory(this.props.match.params.category)
-        this.setState({category: this.props.match.params.category})
+        this.setState({ category: this.props.match.params.category })
     }
 
     componentDidUpdate = () => {
-        if (this.props.match.params.category !== this.state.category){
+        if (this.props.match.params.category !== this.state.category) {
             this.props.fetchFilteredBlogsByCategory(this.props.match.params.category)
-            this.setState({category: this.props.match.params.category})
+            this.setState({ category: this.props.match.params.category })
         }
     }
     // componentWillUpdate = () => {
     //     this.props.fetchFilteredBlogsByCategory(this.props.match.params.category)
     // }
 
-    render(){
-        console.log(this.props)
-        return(
+    render() {
+        // const theCategory = this.state.category
+        // console.log(theCategory)
+        return (
             <div className="homepage-body">
                 <Header />
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-lg-3 category-list">
-                            <CategoryList selectedCategory={this.props.match.params.category}/>
+                            <CategoryList />
                         </div>
                         <div className="col-lg-6">
                             <div className="home-section">
@@ -42,35 +44,42 @@ class FilteredBlogsPage extends React.Component{
                                         data-target="#createBlogModal" 
                                         className="btn btn-warning" >
                                             CREATE NEW BLOG
-                                    </button> */} 
-                                   
-                                    <div className="row">
-                                        <div className="card w-100">
-                                            <div className="card">
-                                                <div className="card-body text-left">
-                                                   <h3>{this.state.category}</h3>
-                                                </div>
+                                    </button> */}
+
+
+                                    {this.state.category !== '' && Object.entries(this.props.categoryList).length ?
+                                        <div className="row">
+                                            <div className="text-center timeline-image p-2 removePadding">
+                                                <img src={`data:jpg;base64,${this.props.categoryList[this.state.category].timelineImageByte}`} className="img-responsive" alt="" />
+                                            </div>
+                                            <div className="d-block ">
+                                                <p className="dark-overlay-timeline display-4">{this.state.category}</p>
                                             </div>
                                         </div>
-                                    </div>     
-                                 </div>
+                                        : ''}
+
+                                </div>
                             </div>
-                            <BlogList filterCategory={this.props.match.params.category}/>
+                            <BlogList filterCategory={this.props.match.params.category} />
                         </div>
                         <div className="col-lg-3">
 
                         </div>
                     </div>
                 </div>
-                
-            </div>                    
+
+            </div>
         )
     }
 }
 
 const mapStateToProps = state => {
-    return {blogListByCategory: Object.values(state.blogList)}
+    console.log(state)
+    return {
+        blogListByCategory: Object.values(state.blogList),
+        categoryList: state.categoryList
+    }
 }
 
 export default connect(mapStateToProps,
-    {fetchFilteredBlogsByCategory})(FilteredBlogsPage)
+    { fetchFilteredBlogsByCategory, fetchAllCategories })(FilteredBlogsPage)

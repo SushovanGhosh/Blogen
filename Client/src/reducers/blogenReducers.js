@@ -25,7 +25,7 @@ export const categories = (state={},action) =>{
 
     switch(action.type){
         case "FETCH_ALL_CATEGORIES":
-            return {...state, ..._.mapKeys(action.payload,'id')}
+            return {...state, ..._.mapKeys(action.payload,'category')}
         default:
             return state;
     }

@@ -100,9 +100,11 @@ public class BlogController {
 		
 		List<BlogCategory> categories = blogCategoryDao.findAll();
 		for(BlogCategory category: categories) {
-			InputStream in = getClass().getResourceAsStream("/images/icons/"+category.getImageName());
+			InputStream imageIcon = getClass().getResourceAsStream("/images/icons/"+category.getImageName());
+			InputStream timelineImage = getClass().getResourceAsStream("/images/timelines/"+category.getTimelineImage());
 			try {
-				category.setImageByte(IOUtils.toByteArray(in));
+				category.setImageByte(IOUtils.toByteArray(imageIcon));
+				category.setTimelineImageByte(IOUtils.toByteArray(timelineImage));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
