@@ -4,6 +4,7 @@
 }
 .home-section .home-inner {
     padding-top: 100px;
+    position: relative;
 }
 .category-list{
     padding-top: 50px; 

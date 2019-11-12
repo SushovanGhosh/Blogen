@@ -5,10 +5,10 @@ import Cookie from 'js-cookie'
 
 import '../css/header.css'
 import Login from './landingPage/Login'
-import {signIn,signOut} from '../actions'
+import { signIn, signOut } from '../actions'
 import history from '../history'
 
-class Header extends React.Component{
+class Header extends React.Component {
 
     // renderLogin = () =>{
     //     if(this.state.isLoggedIn){
@@ -20,11 +20,11 @@ class Header extends React.Component{
     //     }
     // }
 
-    componentDidMount = () =>{
-        if(Cookie.get('authToken')){
+    componentDidMount = () => {
+        if (Cookie.get('authToken')) {
             this.props.signIn(Cookie.get('userId'))
         }
-        else{
+        else {
             this.props.signOut()
         }
 
@@ -40,14 +40,14 @@ class Header extends React.Component{
     }
 
     renderLogInButton = () => {
-        if(this.props.auth.isSignedIn){
+        if (this.props.auth.isSignedIn) {
             return <button onClick={this.onLogout} className="nav-link btn btn-link">Log out</button>
         }
         return <button data-toggle="modal" data-target="#loginModal" className="nav-link btn btn-link">Login</button>
-    } 
+    }
 
-    renderNavlist =() =>{
-        return(
+    renderNavlist = () => {
+        return (
             <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
                     <button href="#home" className="nav-link btn btn-link">Explore</button>
@@ -62,8 +62,17 @@ class Header extends React.Component{
         )
     }
 
-    render(){
+    renderSearchBar = () => {
         return(
+            <form class="form-inline ml-auto">
+                <input class="form-control" type="text" placeholder="Search" aria-label="Search" />
+                <button class="btn btn-mdb-color btn-rounded btn-sm my-0 ml-sm-2" type="submit">Search</button>
+            </form>
+        )
+    }
+
+    render() {
+        return (
             <div>
                 <nav className="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
                     <div className="container">
@@ -72,8 +81,9 @@ class Header extends React.Component{
                             <span className="navbar-toggler-icon"></span>
                         </button>
                         <div className="collapse navbar-collapse" id="myNavbar">
-                                {this.renderNavlist()}
-                                <Login />    
+                            {this.renderSearchBar()}
+                            {this.renderNavlist()}
+                            <Login />
                         </div>
                     </div>
                 </nav>
@@ -83,7 +93,7 @@ class Header extends React.Component{
 }
 
 const mapStateToProps = state => {
-    return {auth: state.auth}
+    return { auth: state.auth }
 }
 
-export default connect(mapStateToProps,{signIn,signOut})(Header)
+export default connect(mapStateToProps, { signIn, signOut })(Header)

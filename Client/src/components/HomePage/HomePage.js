@@ -141,7 +141,7 @@ class HomePage extends React.Component{
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-lg-3 category-list">
-                                <CategoryList />
+                                <CategoryList selectedCategory="" />
                             </div>
                             <div className="col-lg-6">
                                 <div className="home-section">
