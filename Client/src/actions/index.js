@@ -61,3 +61,14 @@ export const fetchFilteredBlogsByCategory = (category) => async dispatch => {
     const response = await authenticatedRequest().get(`/api/blogs/getFilteredBlogsByCategory/${category}`);
     dispatch({type: 'FETCH_POSTS_BY_CATEGORY', payload: response.data})
 }
+
+export const postComment = (formValues,id) => async (dispatch,getState) => {
+
+    const {username} = getState().auth 
+    const date = new Date();
+    const currentDate = date.getFullYear()+'/'+ ('0'+(date.getMonth() + 1)).slice(-2)+'/'+ ('0' +date.getDate()).slice(-2)+ ' '+ 
+    ('0'+date.getHours()).slice(-2) + ":" + ('0'+date.getMinutes()).slice(-2) + ":" + ('0'+date.getSeconds()).slice(-2)
+    const response = await authenticatedRequest().patch(`/api/blogs/postComment/${id}`,{...formValues, username: username, createdDate: currentDate});
+    dispatch({type: "ADD_COMMENT",payload: response.data})
+    
+}

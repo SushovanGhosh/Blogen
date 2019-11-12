@@ -1,6 +1,7 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
-
+import { connect } from 'react-redux'
+import { postComment } from '../../actions'
 import '../../css/commentSection.css'
 
 class CommentSection extends React.Component{
@@ -24,12 +25,18 @@ class CommentSection extends React.Component{
         }
     }
 
+    onCommentPost = formValues => {
+     
+        console.log("Posted")
+        this.props.postComment(formValues,this.props.blogId)
+    }
+
     render(){
         return (
             <div className="comment-section">
                 <hr/>
                 <h2 className="text-center font-weight-light">LEAVE A COMMENT</h2>
-                <form>
+                <form onSubmit={this.props.handleSubmit(this.onCommentPost)}>
                     <div className="form-group">
                         <Field name="comment" onChange={this.validateInput} 
                         component="textarea" placeholder="write a comment" className="form-control" />
@@ -44,6 +51,6 @@ class CommentSection extends React.Component{
 }
 
 
-export default reduxForm({
+export default connect(null,{postComment})(reduxForm({
     form: 'CommentSection'
-})(CommentSection)
+})(CommentSection))

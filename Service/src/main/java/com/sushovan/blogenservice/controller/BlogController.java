@@ -24,8 +24,10 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -134,6 +136,18 @@ public class BlogController {
 		
 		List<BlogPost> result = blogDao.findBlogsByCategory(category);
 		return result;
+	}
+	
+	@PatchMapping("/postComment/{id}")
+	public BlogComment postTheComment(@PathVariable int id, @RequestBody BlogComment comment) {
+		
+		Optional<BlogPost> blog = blogDao.findById(id);
+		blog.orElseThrow(()-> new BadRequestException("Blog with id - "+ id +"is not found"));
+		BlogPost theBlog = blog.get();
+		List<BlogComment> comments = theBlog.getComments();
+		comments.add(comment);
+		blogDao.save(theBlog);
+		return null;
 	}
 	
 	@GetMapping("/getCommentsByBlog/{id}")

@@ -44,7 +44,7 @@ class BlogViewPage extends React.Component{
                             author={username} 
                             date={updatedDate} 
                             body={body} />
-                            <CommentSection />
+                            <CommentSection blogId={this.props.match.params.id} />
                         </div>
                         <div className="col-lg-1"></div>
                         <div className="col-lg-3 d-none d-lg-block">
