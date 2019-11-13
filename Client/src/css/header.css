@@ -2,3 +2,11 @@
     border-bottom: #008ed6 3px solid;
     opacity: 0.9;
 }
+@media (max-width: 583px){
+    .search-box{
+        width: 50%;
+        max-width: 700px;
+        box-sizing: border-box;
+    }
+}
+
