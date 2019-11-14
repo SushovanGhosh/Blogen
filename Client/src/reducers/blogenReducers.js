@@ -42,3 +42,13 @@ export const blogListByCategories = (state={},action) => {
             return state;
     }
 }
+
+// export const comments = (state={}, action) => {
+
+//     switch (action.type){
+//         case 'FETCH_COMMENTS_BY_BLOG':
+//             return {...state, ...action.payload}
+//         default:
+//             return state;
+//     }
+// }

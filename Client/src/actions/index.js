@@ -72,3 +72,9 @@ export const postComment = (formValues,id) => async (dispatch,getState) => {
     dispatch({type: "ADD_COMMENT",payload: response.data})
     
 }
+
+// export const fetchCommentsbyBlog = id => async dispatch => {
+
+//     const response = await authenticatedRequest().get(`/getCommentsByBlog/${id}`);
+//     dispatch({type: "FETCH_COMMENTS_BY_BLOG", payload: response.data})
+// }

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
+
 import { postComment } from '../../actions'
 import '../../css/commentSection.css'
 
@@ -14,6 +15,9 @@ class CommentSection extends React.Component{
     //             <textarea {...input} placeholder={placeholder} className="form-control"/>
     //         </div>
     //     )
+    // }
+    // componentDidMount = () => {
+    //     this.props.fetchCommentsbyBlog(this.props.blogId)
     // }
 
     validateInput = (event) => {
@@ -31,6 +35,11 @@ class CommentSection extends React.Component{
         this.props.postComment(formValues,this.props.blogId)
     }
 
+    renderComments = () => {
+        console.log(this.props.comments)
+
+    }
+
     render(){
         return (
             <div className="comment-section">
@@ -44,13 +53,19 @@ class CommentSection extends React.Component{
                     <button className="btn btn-primary d-block post-button" 
                         disabled={this.state.disablePost}>Post</button>
                     <hr/>
+                    {this.renderComments()}
                 </form>
             </div>
         )
     }
 }
 
+const mapStateToProps = state => {
 
-export default connect(null,{postComment})(reduxForm({
+    return {comments: state.blogList.comments}
+}
+
+
+export default connect(mapStateToProps,{postComment})(reduxForm({
     form: 'CommentSection'
 })(CommentSection))
