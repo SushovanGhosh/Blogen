@@ -64,10 +64,10 @@ class Header extends React.Component {
 
     renderSearchBar = () => {
         return(
-            <form class="form-inline my-lg-0 ml-auto">
+            <form className="form-inline my-lg-0 ml-auto">
                 {/* <select name="search"></select> */}
-                <input class="form-control mr-xs-2 search-box input-lg" type="text" placeholder="Search"/>
-                <button class="btn fas fa-search text-white my-2 my-sm-0" type="submit"></button>
+                <input className="form-control mr-xs-2 search-box input-lg" type="text" placeholder="Search"/>
+                <button className="btn fas fa-search text-white my-2 my-sm-0" type="submit"></button>
             </form>
         )
     }

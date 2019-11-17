@@ -62,7 +62,6 @@ class BlogViewPage extends React.Component{
 }
 
 const mapStateToProps = (state,ownProps) =>{
-    console.log(state)
     return{blog: state.blogList[ownProps.match.params.id], blogList: state.blogList}
 }
 
