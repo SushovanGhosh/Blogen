@@ -3,8 +3,7 @@ import React from "react";
 class DisplayPostedComment extends React.Component {
   render() {
     return (
-      <div className="card">
-        {console.log("Helllllloooo")}
+      <div className="card mb-2">
         <div className="card-body">
             <h5 className="card-title">{this.props.username}</h5>
             <h6 className="card-subtitle mb-2 text-muted">Just now</h6>

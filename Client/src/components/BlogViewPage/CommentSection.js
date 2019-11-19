@@ -1,5 +1,5 @@
 import React from "react";
-import { Field, reduxForm, formValueSelector  } from "redux-form";
+import { Field, reduxForm, formValueSelector, getFormValues  } from "redux-form";
 import { connect } from "react-redux";
 
 import { postComment } from "../../actions";
@@ -31,7 +31,7 @@ class CommentSection extends React.Component {
   onCommentPost = formValues => {
     console.log("Posted");
     this.props.postComment(formValues, this.props.blogId);
-    this.setState({togglePost: 1})
+    this.setState({togglePost: !this.state.togglePost})
 
   };
 
@@ -47,6 +47,10 @@ class CommentSection extends React.Component {
             <h5 className="card-title">{username}</h5>
             <h6 className="card-subtitle mb-2 text-muted">{createdDate}</h6>
             <p className="text-dark lead">{comment}</p>
+            <button class="card-link btn btn-link text-muted pl-0">
+                <i class="fa fa-reply mr-2" aria-hidden="true"></i>
+                Reply
+            </button>
           </div>
         </div>
       );
@@ -91,7 +95,7 @@ class CommentSection extends React.Component {
         </form>
         <hr/>
         {console.log(this.props)}
-        {this.state.togglePost === 1 ? <DisplayPostedComment comment={this.props.comment} username={this.props.username}/>:''}
+        {/* <DisplayPostedComment comment={this.props.comment.slice(0)} username={this.props.username}/> */}
         {this.renderComments()}
       </div>
     );
@@ -101,8 +105,10 @@ class CommentSection extends React.Component {
 const mapStateToProps = state => {
   console.log(state.blogList);
   const selector = formValueSelector('CommentSection')
+  const {comment} = getFormValues('CommentSection')(state) ? getFormValues('CommentSection')(state):''
+  console.log(comment)
   // let comment = state.form.CommentSection ? state.form.CommentSection.values: ''
-  return { blogs: state.blogList, comment: selector(state,'comment'), username: state.auth.username };
+  return { blogs: state.blogList, comment: comment, username: state.auth.username };
 };
 
 export default connect(mapStateToProps, { postComment })(
