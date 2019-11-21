@@ -8,7 +8,7 @@ import DisplayPostedComment from "./DisplayPostedComment";
 import ReplyBox from "./ReplyBox";
 
 class CommentSection extends React.Component {
-    state = { disablePost: true, comment: [], };
+    state = { disablePost: true, comment: [], replyBoxId:'' };
 
     // renderInput = ({input, placeholder}) => {
     //     return (
@@ -45,19 +45,19 @@ class CommentSection extends React.Component {
         return comments.slice(0).reverse().map(element => {
             const { username, comment, createdDate, id } = element
             return (
-                <div>
-                    <div className="card mb-2" key={id}>
+                <div key={id} >
+                    <div className="card mb-2">
                         <div className="card-body">
                             <h5 className="card-title">{username}</h5>
                             <h6 className="card-subtitle mb-2 text-muted">{createdDate}</h6>
                             <p className="text-dark lead">{comment}</p>
-                            <button class="card-link btn btn-link text-muted pl-0">
-                                <i class="fa fa-reply mr-2" aria-hidden="true"></i>
+                            <button onClick={()=>this.setState({replyBoxId: id})} className="card-link btn btn-link text-muted pl-0">
+                                <i className="fa fa-reply mr-2" aria-hidden="true"></i>
                                 Reply
                             </button>
                         </div>
                     </div>
-                    <ReplyBox />
+                    { id === this.state.replyBoxId ? <ReplyBox hide={false}/>: <ReplyBox hide={true}/>}    
                 </div>
 
             );
@@ -89,7 +89,7 @@ class CommentSection extends React.Component {
                             name="comment"
                             onChange={this.validateInput}
                             component="textarea"
-                            placeholder="write a comment"
+                            placeholder="Write a comment..."
                             className="form-control"
                         />
                     </div>
