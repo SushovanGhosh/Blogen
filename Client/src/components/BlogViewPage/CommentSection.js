@@ -57,7 +57,7 @@ class CommentSection extends React.Component {
                             </button>
                         </div>
                     </div>
-                   <ReplyBox hide={false}/>  
+                    { id === this.state.replyBoxId ? <ReplyBox hide={false}/>: <ReplyBox hide={true}/> }    
                 </div>
 
             );
