@@ -38,6 +38,12 @@ class CommentSection extends React.Component {
 
     };
 
+    changeReplyBoxId = (reset) =>{
+        if(reset){
+            this.setState({replyBoxId: ''})
+        }
+    }
+
     renderComments = () => {
         console.log(this.props);
         console.log(this.props.blogs[this.props.blogId]);
@@ -57,7 +63,8 @@ class CommentSection extends React.Component {
                             </button>
                         </div>
                     </div>
-                    { id === this.state.replyBoxId ? <ReplyBox hide={false}/>: <ReplyBox hide={true}/> }    
+                    {/* { id === this.state.replyBoxId ? <ReplyBox hide={false}/>: <ReplyBox hide={true}/> }     */}
+                    { id === this.state.replyBoxId ? <ReplyBox resetReplyBoxId={this.changeReplyBoxId}/>:null}
                 </div>
 
             );
