@@ -20,8 +20,8 @@ class ReplyBox extends React.Component {
 
     render() {
         return (
-            
-            <div className="reply-section mt-2" onBlur={()=> {this.setState({hide: true});this.changeReplyBoxId()}} style={{display:this.state.hide ? 'none':'block'}}>
+            this.state.hide ? null :
+            <div className="reply-section mt-2" onBlur={()=> {this.setState({hide: true});this.changeReplyBoxId()}}>
                 <form className="form-inline" >
                     <div className="form-group mx-sm-3 mb-2">
                         <input type="text" ref={this.inputRef} className="form-control reply-box" placeholder="Write a reply..." />

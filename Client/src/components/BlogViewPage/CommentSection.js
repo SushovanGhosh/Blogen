@@ -8,7 +8,7 @@ import DisplayPostedComment from "./DisplayPostedComment";
 import ReplyBox from "./ReplyBox";
 
 class CommentSection extends React.Component {
-    state = { disablePost: true, comment: [], replyBoxId:'',hide:true };
+    state = { disablePost: true, comment: [], replyBoxId:''};
 
     // renderInput = ({input, placeholder}) => {
     //     return (
@@ -45,8 +45,7 @@ class CommentSection extends React.Component {
     }
 
     renderComments = () => {
-        console.log(this.props);
-        console.log(this.props.blogs[this.props.blogId]);
+        console.log(`${this.state.replyBoxId}---hello`)
         const { comments } = this.props.blogs[this.props.blogId];
         return comments.slice(0).reverse().map(element => {
             const { username, comment, createdDate, id } = element
@@ -57,7 +56,7 @@ class CommentSection extends React.Component {
                             <h5 className="card-title">{username}</h5>
                             <h6 className="card-subtitle mb-2 text-muted">{createdDate}</h6>
                             <p className="text-dark lead">{comment}</p>
-                            <button onClick={()=>this.setState({replyBoxId: id,hide:false})} className="card-link btn btn-link text-muted pl-0">
+                            <button onClick={()=>this.setState({replyBoxId: id})} className="card-link btn btn-link text-muted pl-0">
                                 <i className="fa fa-reply mr-2" aria-hidden="true"></i>
                                 Reply
                             </button>
