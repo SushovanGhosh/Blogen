@@ -7,6 +7,7 @@ import HomePage from './HomePage/HomePage'
 import { PrivateRouteToHome,PrivateRouteToLogin } from './PrivateRoute'
 import BlogViewPage from './BlogViewPage/BlogViewPage'
 import FilteredBlogsPage from './FilteredBlogsPage/FilteredBlogsPage'
+import ProfileViewPage from './ProfileViewPage/ProfileViewPage'
 
 class App extends React.Component{
 
@@ -20,6 +21,7 @@ class App extends React.Component{
                             <PrivateRouteToHome path='/home' exact component={HomePage} />
                             <PrivateRouteToHome path='/viewBlog/:id' exact component={BlogViewPage} />
                             <PrivateRouteToHome path='/blogCategory/:category' exact component={FilteredBlogsPage} />
+                            <PrivateRouteToHome path='/myprofile' exact component={ProfileViewPage} />
                         </Switch>
                     </div>
                 </Router>
