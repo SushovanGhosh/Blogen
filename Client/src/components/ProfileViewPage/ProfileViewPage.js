@@ -8,6 +8,21 @@ import ProfilePostsPage from './ProfilePostsPage'
 import ProfileContactPage from './ProfileContactsPage'
 class ProfileViewPage extends React.Component{
 
+    state = {item:"#home"}
+
+    stopToggle = (itemId) =>{
+        if(this.state.item!==itemId){
+            this.setState({item: itemId})
+        }
+    }
+
+    componentDidUpdate = () => {
+        console.log("hi")
+        window.$('.port-item').click(function (){
+            return false
+        })
+    }
+
     render(){
 
         return (
@@ -17,7 +32,7 @@ class ProfileViewPage extends React.Component{
                     <header id="profile-header">
                         <div className="row no-gutters">
                             <div className="col-lg-4 col-md-5">
-                                <img src={profileImage} alt="profile-picture"></img>
+                                <img src={profileImage} alt="profile-pic"></img>
                             </div>
                             <div className="col-lg-8 col-md-7">
                                 <div className="d-flex flex-column">
@@ -52,19 +67,19 @@ class ProfileViewPage extends React.Component{
                                     </div>
                                     <div>
                                         <div className="d-flex flex-row text-white align-items-stretch text-center">
-                                            <div className="port-item p-4 bg-primary" data-toggle="collapse" data-target="#home">
+                                            <div className="port-item p-4 bg-primary" onClick={() =>this.stopToggle("#home")} data-target="#home" data-toggle="collapse">
                                                 <i className="fas fa-home fa-2x d-block"></i>
                                                 <span className="d-none d-sm-block">Home</span>
                                             </div>
-                                            <div className="port-item p-4 bg-success" data-toggle="collapse" data-target="#posts">
+                                            <div className="port-item p-4 bg-success" onClick={() => this.stopToggle("#posts")} data-toggle={this.state.item === "#posts" ? "":"collapse"} data-target="#posts">
                                                 <i className="fas fa-pencil-square-o fa-2x d-block"></i>
                                                 <span className="d-none d-sm-block">Posts</span>
                                             </div>
-                                            <div className="port-item p-4 bg-warning" data-toggle="collapse" data-target="#followers">
+                                            <div className="port-item p-4 bg-warning" onClick={() => this.stopToggle("#followers")} data-toggle={this.state.item === "#followers" ? "":"collapse"} data-target="#followers">
                                                 <i className="fas fa-users fa-2x d-block"></i>
                                                 <span className="d-none d-sm-block">Followers</span>
                                             </div>
-                                            <div className="port-item p-4 bg-danger" data-toggle="collapse" data-target="#contact">
+                                            <div className="port-item p-4 bg-danger" onClick={() => this.stopToggle("#contact")} data-toggle={this.state.item === "#contact" ? "":"collapse"} data-target="#contact">
                                                 <i className="fas fa-envelope fa-2x d-block"></i>
                                                 <span className="d-none d-sm-block">Contact</span>
                                             </div>
