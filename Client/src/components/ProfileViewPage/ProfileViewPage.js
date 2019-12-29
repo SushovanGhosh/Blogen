@@ -16,13 +16,6 @@ class ProfileViewPage extends React.Component{
         }
     }
 
-    componentDidUpdate = () => {
-        console.log("hi")
-        window.$('.port-item').click(function (){
-            return false
-        })
-    }
-
     render(){
 
         return (
@@ -31,9 +24,18 @@ class ProfileViewPage extends React.Component{
                 <div className="container mt-5">
                     <header id="profile-header">
                         <div className="row no-gutters">
-                            <div className="col-lg-4 col-md-5">
-                                <img src={profileImage} alt="profile-pic"></img>
-                            </div>
+                        <div className="avatar col-lg-4 col-md-5" data-content="Change profile Picture">
+                            <img src={profileImage} alt="profile-pic"/>
+                            <div class="btn">
+                            <input type="file" name="myAvatar" />
+                            </div>       
+                        </div>
+                            {/* <div className="avatar col-lg-4 col-md-5" data-content="Change profile Picture"> 
+                                <img src={profileImage} alt="profile-pic"/>
+                                
+                                <input type="file" name="myAvatar" />
+                            </div> */}
+                            
                             <div className="col-lg-8 col-md-7">
                                 <div className="d-flex flex-column">
                                     <div className="p-5 bg-dark text-white">
@@ -67,19 +69,19 @@ class ProfileViewPage extends React.Component{
                                     </div>
                                     <div>
                                         <div className="d-flex flex-row text-white align-items-stretch text-center">
-                                            <div className="port-item p-4 bg-primary" onClick={() =>this.stopToggle("#home")} data-target="#home" data-toggle="collapse">
+                                            <div className="port-item one p-4 bg-primary" style={this.state.item==="#home" ? {pointerEvents:"none"}:{pointerEvents:"auto"}} onClick={() => this.stopToggle("#home")} data-target="#home" data-toggle="collapse">
                                                 <i className="fas fa-home fa-2x d-block"></i>
                                                 <span className="d-none d-sm-block">Home</span>
                                             </div>
-                                            <div className="port-item p-4 bg-success" onClick={() => this.stopToggle("#posts")} data-toggle={this.state.item === "#posts" ? "":"collapse"} data-target="#posts">
+                                            <div className="port-item two p-4 bg-success" style={this.state.item==="#posts" ? {pointerEvents:"none",backgroundColor:"red"}:{pointerEvents:"auto"}} onClick={() => this.stopToggle("#posts")} data-toggle="collapse" data-target="#posts">
                                                 <i className="fas fa-pencil-square-o fa-2x d-block"></i>
                                                 <span className="d-none d-sm-block">Posts</span>
                                             </div>
-                                            <div className="port-item p-4 bg-warning" onClick={() => this.stopToggle("#followers")} data-toggle={this.state.item === "#followers" ? "":"collapse"} data-target="#followers">
+                                            <div className="port-item p-4 bg-warning" style={this.state.item==="#followers" ? {pointerEvents:"none",backgroundColor:"red"}:{pointerEvents:"auto"}} onClick={() => this.stopToggle("#followers")} data-toggle="collapse" data-target="#followers">
                                                 <i className="fas fa-users fa-2x d-block"></i>
                                                 <span className="d-none d-sm-block">Followers</span>
                                             </div>
-                                            <div className="port-item p-4 bg-danger" onClick={() => this.stopToggle("#contact")} data-toggle={this.state.item === "#contact" ? "":"collapse"} data-target="#contact">
+                                            <div className="port-item p-4 bg-danger" style={this.state.item==="#contact" ? {pointerEvents:"none",backgroundColor:"red"}:{pointerEvents:"auto"}} onClick={() => this.stopToggle("#contact")} data-toggle="collapse" data-target="#contact">
                                                 <i className="fas fa-envelope fa-2x d-block"></i>
                                                 <span className="d-none d-sm-block">Contact</span>
                                             </div>
