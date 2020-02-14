@@ -26,8 +26,11 @@ class ProfileViewPage extends React.Component{
                         <div className="row no-gutters">
                         <div className="avatar col-lg-4 col-md-5" data-content="Change profile Picture">
                             <img src={profileImage} alt="profile-pic"/>
-                            <div class="btn">
-                            <input type="file" name="myAvatar" />
+                            <div class="d-flex justify-content-center">
+                            <div class="btn btn-mdb-color btn-rounded float-left">
+                             <span>Choose file</span>
+                            <input type="file"/>
+                            </div>
                             </div>       
                         </div>
                             {/* <div className="avatar col-lg-4 col-md-5" data-content="Change profile Picture"> 

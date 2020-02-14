@@ -40,20 +40,20 @@
     z-index:3;
 }
 
-.avatar input[type=file] {
-    font-size: 30px;
+/* .avatar input[type=file] {
+    font-size: 19px;
     position: absolute;
     left: 0px;
     z-index: -1;
     top: 0px;
     cursor: pointer;
     opacity: 1;
-  }
+  } */
 
-  .avatar .btn {
+  /* .avatar .btn {
     position: absolute;
     top: 84%;
-    left: 9%;
+    left: 10%;
     z-index: -2;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
@@ -65,7 +65,7 @@
     cursor: pointer;
     
     text-align: center;
-  } 
+  }  */
 
   .avatar:hover .btn{
     z-index: 2; 
